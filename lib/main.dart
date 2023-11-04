@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
-void main(){
+import 'package:flutter/services.dart';
+import 'package:make_a_million/View/LandingPage.dart';
+
+void main() {
   runApp(const MakeAMillion());
 }
+
 class MakeAMillion extends StatelessWidget {
   const MakeAMillion({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      title: 'Make A Million',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Make A Million'),
+    return MaterialApp(
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+
+            systemOverlayStyle: SystemUiOverlayStyle( //<-- SEE HERE
+              // Status bar color
+              statusBarColor: Colors.white,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+            ),
+          ),
+
+            primaryColor: const Color(0xff1F41BB),
+            primaryColorLight:  const Color(0xffF1F4FF),
+
         ),
-        body: Center(
-          child: Text('Make A Million'),
-        ),
-      ),
-    );
+
+
+
+        debugShowCheckedModeBanner: false,
+        title: 'Make A Million',
+        home:LandingPage());
   }
 }
