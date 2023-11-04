@@ -33,9 +33,29 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Image.asset(
+              "assets/images/signup.jpg",
+              fit: BoxFit.cover,
+            ),
+            Text(
+              "Welcome to Make a Million.!",
+              style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600, fontSize: mediaQuery.width * .05),
+            ),
+            Text(
+              "Create an account and let's get started.",
+              style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w400,
+                  fontSize: mediaQuery.width * .04,
+                  color: Theme.of(context).primaryColor),
+            ),
+            SizedBox(
+              height: mediaQuery.height * .03,
+            ),
             Form(
                 key: _formKey,
                 child: Container(
@@ -64,10 +84,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintStyle: GoogleFonts.nunitoSans(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black38),
-                            fillColor: Colors.black12,
+                            fillColor: Theme.of(context).primaryColorLight,
                             filled: true,
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none)),
                       ),
                       TextFormField(
@@ -91,10 +111,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintStyle: GoogleFonts.nunitoSans(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black38),
-                            fillColor: Colors.black12,
+                            fillColor: Theme.of(context).primaryColorLight,
                             filled: true,
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none)),
                       ),
                       TextFormField(
@@ -117,10 +137,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintStyle: GoogleFonts.nunitoSans(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black38),
-                            fillColor: Colors.black12,
+                            fillColor: Theme.of(context).primaryColorLight,
                             filled: true,
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none)),
                       ),
                       ElevatedButton(
@@ -131,10 +151,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30))),
+                                      borderRadius: BorderRadius.circular(10))),
                               padding: MaterialStateProperty.all(
                                   EdgeInsets.symmetric(
-                                      horizontal: mediaQuery.width * .11,
+                                      horizontal: mediaQuery.width * .15,
                                       vertical: mediaQuery.height * .015)),
                               backgroundColor: MaterialStateProperty.all(
                                   Theme.of(context).primaryColor)),
@@ -145,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           )
                               :Text(
                             "Create Account",
-                            style: GoogleFonts.nunitoSans(
+                            style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                                 fontSize: mediaQuery.width * .04),
