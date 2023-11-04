@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:make_a_million/View/LandingPage.dart';
+import 'package:make_a_million/View/SeekerView/SeekerHome.dart';
 
 void main() {
   runApp(const MakeAMillion());
@@ -32,6 +33,6 @@ class MakeAMillion extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
         title: 'Make A Million',
-        home:LandingPage());
+        home:SeekerHome());
   }
 }

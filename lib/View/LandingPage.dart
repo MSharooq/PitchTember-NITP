@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:make_a_million/Helpers/custom_route_animation.dart';
 import 'package:make_a_million/View/LoginPage.dart';
@@ -10,6 +11,18 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: const SystemUiOverlayStyle( //<-- SEE HERE
+          // Status bar color
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+        ),
+      ),
       body: SizedBox(
         width: size.width,
         child: Column(
