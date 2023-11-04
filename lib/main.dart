@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:make_a_million/View/LandingPage.dart';
-import 'package:make_a_million/View/SeekerView/SeekerHome.dart';
+
+import 'View/CandidateView/SeekerHome.dart';
 
 void main() {
   runApp(const MakeAMillion());

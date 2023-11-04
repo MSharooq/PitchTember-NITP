@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:make_a_million/Helpers/custom_route_animation.dart';
+
+import 'PendingInterview.dart';
 
 class ListInterviews extends StatelessWidget {
   const ListInterviews({super.key, required this.type});
@@ -13,6 +16,9 @@ class ListInterviews extends StatelessWidget {
         itemCount: 5,
         itemBuilder: (ctx, index) {
           return ListTile(
+            onTap: (){
+              Navigator.push(context, SlidePageRoute(page: const PendingInterview()));
+            },
             leading:  CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
