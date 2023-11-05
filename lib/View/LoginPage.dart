@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:make_a_million/Controller/AuthServices.dart';
+import 'package:make_a_million/Model/Candidate.dart';
+import 'package:make_a_million/View/CandidateView/SeekerHome.dart';
+import 'package:make_a_million/View/CompanyView/CompanyHome.dart';
 import 'package:make_a_million/View/SignUpPage.dart';
 
 import '../Controller/AuthValidator.dart';
 import '../Helpers/custom_route_animation.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.role});
+   LoginPage({super.key});
 
-  final String role;
+  final String role = AuthServices.isCandidate? "Candidate" : "Company";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -125,7 +129,20 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         ElevatedButton(
-                            onPressed: () async {},
+                            onPressed: () async {
+                           bool isSuccess =   await AuthServices.login(_emailController.text, _passwordController.text, context);
+                           print(isSuccess);
+                           if(isSuccess){
+                             if(AuthServices.isCandidate){
+                                Navigator.push(context,SlidePageRoute(page: SeekerHome()));
+
+                             }
+                             else{
+                               Navigator.push(context, SlidePageRoute(page: CompanyHome()));
+                             }
+                           }
+
+                            },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all(
                                     RoundedRectangleBorder(

@@ -4,11 +4,19 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:make_a_million/Controller/AuthServices.dart';
+import 'package:read_pdf_text/read_pdf_text.dart';
+
+import '../../Helpers/custom_route_animation.dart';
+import '../CompanyView/CompanyHome.dart';
+import 'SeekerHome.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key, required this.type});
+  RegistrationScreen({super.key, required this.email, required this.password});
 
-  final String type;
+  final String type = AuthServices.isCandidate ? "Candidate" : "Company";
+  final String email;
+  final String password;
 
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
@@ -37,6 +45,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       return FileImage(File(image!.path!));
     }
   }
+
+  String text = "";
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +158,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         widget.type == "Candidate"
                             ? ElevatedButton.icon(
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  FilePickerResult? result =
+                                      await FilePicker.platform.pickFiles(
+                                          allowMultiple: false,
+                                          type: FileType.any);
+                                  PlatformFile file = result!.files.first;
+                                  text =
+                                      await ReadPdfText.getPDFtext(file.path!);
+                                  print(text);
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   foregroundColor:
@@ -170,14 +189,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       fontSize: mediaQuery.width * .04),
                                 ))
                             : TextFormField(
-                                controller: _nameController,
-                                validator: (value) {
-                                  if (value!.isEmpty || value.length < 8) {
-                                    return "Invalid Address";
-                                  } else {
-                                    return null;
-                                  }
-                                },
                                 style: GoogleFonts.nunitoSans(),
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.emailAddress,
@@ -200,7 +211,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         borderSide: BorderSide.none)),
                               ),
                         ElevatedButton(
-                            onPressed: () async {},
+                            onPressed: () async {
+                              bool isValid = _key.currentState!.validate();
+                              if (isValid) {
+                                bool isSuccess = await AuthServices.register(
+                                    widget.email,
+                                    widget.password,
+                                    _nameController.text,
+                                    text,
+                                    context);
+                                if (isSuccess) {
+                                  Navigator.push(
+                                      context,
+                                      SlidePageRoute(
+                                          page: widget.type == "Candidate"
+                                              ? SeekerHome()
+                                              : CompanyHome()));
+                                }
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Theme.of(context).primaryColor,
                               padding: EdgeInsets.symmetric(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:make_a_million/Controller/AuthServices.dart';
 import 'package:make_a_million/Helpers/custom_route_animation.dart';
 import 'package:make_a_million/View/LoginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -16,7 +18,8 @@ class LandingPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        systemOverlayStyle: const SystemUiOverlayStyle( //<-- SEE HERE
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          //<-- SEE HERE
           // Status bar color
           statusBarColor: Colors.white,
           statusBarIconBrightness: Brightness.dark,
@@ -83,8 +86,12 @@ class LandingPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,SlidePageRoute(page: const LoginPage( role: 'Company',)));
+                  onPressed: () async{
+                   final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool("isCandidate", false);
+
+                    AuthServices.isCandidate = false;
+                    Navigator.push(context, SlidePageRoute(page: LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).primaryColor,
@@ -92,17 +99,20 @@ class LandingPage extends StatelessWidget {
                           horizontal: size.width * .1,
                           vertical: size.height * .015),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))
-                  ),
-                  child:  Text("Company",
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Text("Company",
                       style: GoogleFonts.poppins(
                           fontSize: size.width * .04,
                           color: Colors.white,
                           fontWeight: FontWeight.w600)),
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,SlidePageRoute(page: const LoginPage( role: 'Candidate',)));
+                    onPressed: () async{
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.setBool("isCandidate", false);
+                      AuthServices.isCandidate = true;
+                      Navigator.push(
+                          context, SlidePageRoute(page: LoginPage()));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
@@ -110,8 +120,7 @@ class LandingPage extends StatelessWidget {
                             horizontal: size.width * .1,
                             vertical: size.height * .015),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))
-                    ),
+                            borderRadius: BorderRadius.circular(10))),
                     child: Text("Candidate",
                         style: GoogleFonts.poppins(
                             fontSize: size.width * .04,

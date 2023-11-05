@@ -1,11 +1,13 @@
 class Seeker{
+  String userId;
   String name;
   String email;
-  List<String> applications;
+
   Seeker({
+    required this.userId,
     required this.name,
     required this.email,
-    required this.applications
+
 });
 
 }

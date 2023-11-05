@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:make_a_million/Helpers/custom_route_animation.dart';
+import 'package:make_a_million/View/CandidateView/RegistrationPage.dart';
 
 import '../Controller/AuthValidator.dart';
 class SignUpPage extends StatefulWidget {
@@ -145,6 +147,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       ElevatedButton(
                           onPressed: () async {
+                           bool isValid =  _formKey.currentState!.validate();
+                           if(isValid){
+                             Navigator.push(context, SlidePageRoute(page: RegistrationScreen(email: _emailController.text, password: _passwordController.text,)));
+
+                           }
 
 
                           },

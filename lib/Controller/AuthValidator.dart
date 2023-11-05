@@ -19,13 +19,7 @@ class AuthValidators{
     if(password.isEmpty || confirmPassword.isEmpty|| password.length<8){
       return "Password is too short or empty";
     }
-    else if(!password.contains(RegExp(r'[A-Z]'))){
-      return "Atleast one Uppercase letter is required";
 
-    }
-    else if(password.contains( RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
-      return "Atleast one special character is required";
-    }
     else if(password != confirmPassword){
       return "Passwords doesn't match";
     }
