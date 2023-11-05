@@ -130,16 +130,25 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         ElevatedButton(
                             onPressed: () async {
+                              setState(() {
+                                isLoading = true;
+                              });
                            bool isSuccess =   await AuthServices.login(_emailController.text, _passwordController.text, context);
                            print(isSuccess);
+                              isLoading = false;
                            if(isSuccess){
                              if(AuthServices.isCandidate){
-                                Navigator.push(context,SlidePageRoute(page: SeekerHome()));
+                                Navigator.push(context,SlidePageRoute(page: const SeekerHome()));
 
                              }
                              else{
                                Navigator.push(context, SlidePageRoute(page: CompanyHome()));
                              }
+                           }
+                           else{
+                             setState(() {
+
+                             });
                            }
 
                             },

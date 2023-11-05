@@ -139,6 +139,7 @@ class AddJobRole extends StatelessWidget {
                       onPressed: () async {
                         bool isSuccess = await JobServices.addJobRole(_nameController.text, _descriptionController.text, applicants);
                         if(isSuccess){
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Job Created Successfully"),backgroundColor: Colors.green,));
                           Navigator.pop(context);
                         }
 
