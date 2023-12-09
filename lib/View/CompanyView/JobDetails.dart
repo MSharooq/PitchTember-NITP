@@ -18,15 +18,23 @@ class JobDetails extends StatelessWidget {
           ),
           Text(data['role'],style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 20),),
           SizedBox(height: size.height*.03,),
-          Text(data['description'],style: GoogleFonts.poppins(fontWeight: FontWeight.w400),),
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: size.width*.1),
+            child: Text(data['description'],style: GoogleFonts.poppins(fontWeight: FontWeight.w400),),
+          ),
           SizedBox(height: size.height*.03,),
+          Text("Applicants",style: GoogleFonts.poppins(fontWeight: FontWeight.w600,fontSize: 20),),
           Expanded(
             child: ListView.builder(
               itemCount: data['applicants'].length,
                 itemBuilder: (ctx,index){
 
               return ListTile(
-                title: Text(data['applicants'][index]['email']),
+                leading: CircleAvatar(
+                  backgroundColor: Theme.of(context).primaryColor,
+                ),
+                title: Text(data['applicants'][index]['email'],style:
+                  GoogleFonts.poppins(fontWeight: FontWeight.w400),),
               );
             }),
           )

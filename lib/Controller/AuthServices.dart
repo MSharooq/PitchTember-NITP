@@ -24,8 +24,8 @@ class AuthServices {
     }
   }
 
-  static const String _userUrl = "http://192.168.9.49:5000/api/v1/user/";
-  static const String _companyUrl = "http://192.168.9.49:5000/api/v1/company/";
+  static const String _userUrl = "http://192.168.125.77:5000/api/v1/user/";
+  static const String _companyUrl = "http://192.168.125.77:5000/api/v1/company/";
 
   static Future<bool> login(
       String email, String password, BuildContext context) async {

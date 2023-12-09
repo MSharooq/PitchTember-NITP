@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:make_a_million/Controller/AuthServices.dart';
 
 class JobServices {
-  static const String baseUrl = "http://192.168.9.49:5000/api/v1/opening/";
+  static const String baseUrl = "http://192.168.125.77:5000/api/v1/opening/";
 
   static Future<bool> addJobRole(
       String name, String description, List<String> applicants) async {
